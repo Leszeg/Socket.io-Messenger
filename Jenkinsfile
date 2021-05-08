@@ -23,7 +23,7 @@ pipeline{
 
 		stage('Test'){
 			when {
-				expression {currentBuild.result == 'SUCCESS' }
+				expression {currentBuild.result == 'Success' }
 			}
 
 			steps{
