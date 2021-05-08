@@ -46,6 +46,6 @@ def statusAllert(stage, status) {
 	echo status
 	emailext attachLog: true,
 		body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
-		to: 'radoslaw.niestroj2000@gmail.com',
+		to: 'olekn41@gmail.com',
 		subject: stage + status
 }
