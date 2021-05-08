@@ -1,11 +1,13 @@
 pipeline{
 	agent any
+	tools {nodejs "node" }
 	stages {
 		stage('Build') {
 			steps{
 				echo 'Building'
 				sh 'git pull origin master'
 				sh 'npm install'    
+				sh 'npm run build'  
 			}			
 			post{
 				always{
