@@ -1,13 +1,15 @@
 pipeline{
 	agent any
-	tools {nodejs "node" }
+	tools {
+		nodejs "node"
+	}
 	stages {
 		stage('Build') {
-			steps{
+			steps {
 				echo 'Building'
 				sh 'git pull origin master'
-				sh 'npm install'    
-			}			
+				sh 'npm install'
+			}
 			post{
 				always{
 					echo 'Finished'
@@ -20,18 +22,11 @@ pipeline{
 				}
 			}
 		}
-
-		stage('Test'){
-			when {
-				expression {currentBuild.result == 'Failure' }
-			}
-
-			steps{
+		stage('Test') {
+			steps {
 				echo 'Testing'
 				sh 'npm run test'
-			}   
-
-
+			}
 			post{
 				always{
 					echo 'Finished'
@@ -43,14 +38,14 @@ pipeline{
 					statusAllert('Test', 'Success')
 				}
 			}
-		}      
-	}	
+		}
+	}
 }
 
 def statusAllert(stage, status) {
-echo status
-emailext attachLog: true,
-body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
-to: 'olekn41@gmail.com',
-subject: stage + status
+	echo status
+	emailext attachLog: true,
+		body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+		to: 'radoslaw.niestroj2000@gmail.com',
+		subject: stage + status
 }
